@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Aplikace na zobrazení počasí 
+V tomto úkolu si vytvoříme aplikaci, která nám zobrazí aktuální počasí a předpověď na pět dní ve vybraném místě. Finální aplikace bude vypadat nějak takto:  
+     
+<img src="ReadmeImages/weather_app_result.png" height="600px"/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## API
+K získání dat o počasí budeme používat API zdarma z [open weather map](https://openweathermap.org/api).
+K použití daného API je potřeba se zaregistrovat, a tak získat unikátní id, které budeš zadávát při volání. Zaregistruj se tedy na stránce a vyčkej, až ti přijde e-mail s potvrzením. V emailu uvidíš své API id a také URL endpoint, který je potřeba použít při získávání dat. API id si můžeš také zjistit ve svém profilu na stránce OpenWeather, kde si můžeš zakládat i další id. Měj na paměti, že aktivace klíče po registraci může trvat několik hodin. Mezitím velice doporučuji podívat se na [dokumentaci OpenWeather](https://openweathermap.org/current) a pročíst si v jakém formátu ti data přijdou. 
+     
+<img src="ReadmeImages/open_weather_api_email.jpg" height="700px"/>
 
-## Available Scripts
+## Spuštění a struktura aplikace
 
-In the project directory, you can run:
-
+Udělej si fork tohoto repozitáře a tento fork si naklonuj k sobě. Vše nainstaluješ pomocí spuštění příkazu 
+### `npm install`    
+Po nainstalování spusť aplikaci pomocí 
 ### `npm start`
+Měla bys vidět toto:     
+     
+<img src="ReadmeImages/weather_app_starter.jpg" height="500px"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Hlavní html a css je pro tebe už připravené. Prohlédni si obsah složky `src`.     
+V souboru `index.js` probíhá renderování aplikace. V `index.css` je globální stylování, všimni si, že pro základní barvy a styly jsou vytvořené proměnné, které se pak používají skrz celou aplikaci. Toto je dobrý způsob, protože kdybychom třeba chtěli změnit barevnou paletu, stačí upravit barvy tady a není potřeba procházet css celé aplikace.      
+V souboru `App.js` je připravený základní obsah aplikace. Nějaký obsah je zakomentovaný, aby se nám aplikace zkompilovala. V `App.css` je pak připravené stylování pro celou aplikaci. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Data 
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Abychom mohli v aplikaci zobrazovat data o počasí, potřebujeme nejdřív data stáhnout.   
+Jelikož data z OpenWeather jsou v angličtině, a dotazy je potřeba také dělat v angličtině, naše aplikace je také v AJ, aby to nebyl takový mišmaš. 
+V App.js si napiš fetch funkci, ve které použiješ URL a API ID z emailu, který ti došel. Vyber si nějaké město, jehož data budeš na začátek stahovat, než přidáme možnost město měnit.     
+Je možné, že základní teplota, kterou open weather posílá bude v kelvinech, v takovém případě přidej do URL parameter `units=metric`. 
+Tvoje API url by mohlo vypadat nějak takhle: 
+`api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&appid={tve unikatni API ID}`
