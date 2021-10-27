@@ -7,6 +7,11 @@ const App = () => {
       <div className="container">
         <h1>My Weather App</h1>
         <div className="weather">
+          {/* <div className="button-group">
+            <button className="button">City01</button>
+            <button className="button">City02</button>
+            <button className="button">City03</button>
+          </div> */}
           <div className="weather__current">
             <h2 className="weather__city" id="mesto">
               City, Country
