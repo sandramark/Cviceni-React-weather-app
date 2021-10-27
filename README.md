@@ -173,6 +173,70 @@ Nám ale stačí pouze jedna předpověď na den, tedy každá osmá. Vytvoř si
           </details>
       </details>
 
+### Nastavení stavu forecast 
+Vytvoříme si ještě jeden stav, který bude v sobě mít pole s předpovědí na 5 dní. Tento stav si nazvi `forecast` a funkci na změnu `setForecast`. Nastav defaultní hodnotu na `null`.
+Při fetchování dat o předpovědi místo výpisu do konzole nastav stav `forecast`. Není třeba si ukládat celý objekt s polem o 40 položkách, proto při volání `setForecast` použij svou filtrovací fuknci a tak nastavíš do stavu pouze data, která budeme používat. 
+
+### Příprava dat
+Po provedení fetche budeš mít v proměnné `forecast` pole s položkami takového formátu: 
+
+<img src="ReadmeImages/forecast_array_item.jpg"/>     
+
+Opět vidíš vyznačená data, která budeme potřebovat k zobrazení předpovědi počasí. Teplotu už umíš zaokrouhlit a ikonu si už umíš použít, aby se zobrazily tak, jak potřebujeme.     
+Ale ajaj, pod klíčem `dt` je opět ten divný kód. Teď z něj nepotřebujeme hodiny a minuty, ale den v týdnu, datum a měsíc.    
+Vytvoř si funkci, která bude jako parametr brát unix time stamp a vrátí ti řetězec ve formátu `"Tuesday, 25 October"`. Budeš muset opět použít `new Date ...`, a nějakou z metod jako `getDay()`, `getDate()` a `getMonth()`. 
+
+<details>
+          <summary>Už jsem nějakou funkci napsala, ale zasekla jsem se.</summary>
+          <br>
+Jedno řešení je za použití pole dnů v týdnu a měsíců v roce. Můžeš si zkopírovat tato: 
+<pre><code> 
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];     
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];        
+</code></pre>  
+          <details>
+          <summary>Aha! Zkouším to dál, i s googlem a polema a jsem v koncích, Pomooooc..</summary>
+          <br>
+          Opět tady uvidíš jen jedno z možných řešení, zkus si navrhnout i nějaké svoje :) 
+               <pre><code>
+ const getDayfromUnix = (unix) => {
+  const date = new Date(unix * 1000);
+  return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()} `;
+};
+               </code></pre>
+          </details>
+      </details>
+ 
+
+### Zobrazení předpovědi
+Data máme nachystaná, teď už je jen zobrazit! Jak už asi správně tušíš, budeme opět mapovat, protože ve stavu máme pole :) 
+`div.weather__forecast` obsahuje zatím jen jeden `div.forecast`. Pomocí mapování vykresli 5 takových divů se správným obsahem na následujících pět dní.     
+Budeš tedy mapovat stav `forecast`, do kterého sis uložila vyfiltrované pole o 5 položkách.     
+Nezapomeň, že stejně jako u divu `weather__current` jsme museli obsah zobrazit podmíněně, musíme i tady použít ternární operátor. 
+Pokud `forecast` není `undefined` nebo `null`, zobraz předpověď. V opačném případě nezobrazuj nic, a nebo komponentu Loading, kterou sis vytvořila. 
+
+## Bonus - select
 
 #### Komponenta
 Přesuň tlačítko do samostatné komponenty, která bude brát dvě prop, název města a funkci, která se vykoná na kliknutí. Prop s názvem města použij při nastavení textu tlačítka, funkci při kliku. (Přesuň i styly z `App.css`).
