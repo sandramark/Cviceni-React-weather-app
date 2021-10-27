@@ -148,7 +148,7 @@ Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data nač
 ## Předpověď na pět dní 
 Už dokážeme získat aktuální počasí na různých místech, teď ještě zobrazíme předpověď na následujících 5 dní.      
 Vytvoř si další funkci, kde budeš fetchovat data z OpenWeather. [V dokumentaci najdeš potřebné URL](https://openweathermap.org/forecast5).     
-Jako město opět použij `city`, které máš uložené ve stavu. Pošli ho do funkce jako parametr.     
+Jako město opět použij `city`, které máš uložené ve stavu. Předej ho do funkce jako parametr.     
 Nejdříve si data vypiš do konzole. 
 Předpověď na 5 dní je uváděná po 3 hodinách. Každý den 8 předpovědí, 5 x 8 = 40! V datech získáme tedy pole o 40 položkách s údaji o počasí. 
 
@@ -159,18 +159,16 @@ Nám ale stačí pouze jedna předpověď na den, tedy každá osmá. Vytvoř si
           <summary>Zkouším horem dolem a nejde to, chci nápovědu.</summary>
           <br>
                Můžeš filtrovat ne jen podle samotných položek, ale také podle indexu, na kterém se položka nachází. 
-               ```
-               array.filter((item, index) => ... );
-               ```
+               `array.filter((item, index) => ... ); `     
                item se někdy nahrazuje pouze podtržítkem, pokud se nepoužívá.
           <details>
           <summary>Stále netuším :(</summary>
           <br>
           Tak je fajn, že jsi to alespoň zkusila a něco nového se naučila! Pamatuj, že toto je pouze jedno v mnoha možných řešení ;) 
                <pre><code>
-                    const filterForecast = (array) => {
-                         return array.filter((_, index) => index % 8 === 0);
-                    };
+     const filterForecast = (array) => {
+          return array.filter((_, index) => index % 8 === 0);
+     };
                </code></pre>
           </details>
       </details>
