@@ -173,11 +173,11 @@ Nám ale stačí pouze jedna předpověď na den, tedy každá osmá. Vytvoř si
           </details>
       </details>
 
-### Nastavení stavu forecast 
+#### Nastavení stavu forecast 
 Vytvoříme si ještě jeden stav, který bude v sobě mít pole s předpovědí na 5 dní. Tento stav si nazvi `forecast` a funkci na změnu `setForecast`. Nastav defaultní hodnotu na `null`.
 Při fetchování dat o předpovědi místo výpisu do konzole nastav stav `forecast`. Není třeba si ukládat celý objekt s polem o 40 položkách, proto při volání `setForecast` použij svou filtrovací fuknci a tak nastavíš do stavu pouze data, která budeme používat. 
 
-### Příprava dat
+#### Příprava dat
 Po provedení fetche budeš mít v proměnné `forecast` pole s položkami takového formátu: 
 
 <img src="ReadmeImages/forecast_array_item.jpg"/>     
@@ -229,20 +229,95 @@ const months = [
       </details>
  
 
-### Zobrazení předpovědi
+#### Zobrazení předpovědi
 Data máme nachystaná, teď už je jen zobrazit! Jak už asi správně tušíš, budeme opět mapovat, protože ve stavu máme pole :) 
 `div.weather__forecast` obsahuje zatím jen jeden `div.forecast`. Pomocí mapování vykresli 5 takových divů se správným obsahem na následujících pět dní.     
 Budeš tedy mapovat stav `forecast`, do kterého sis uložila vyfiltrované pole o 5 položkách.     
 Nezapomeň, že stejně jako u divu `weather__current` jsme museli obsah zobrazit podmíněně, musíme i tady použít ternární operátor. 
 Pokud `forecast` není `undefined` nebo `null`, zobraz předpověď. V opačném případě nezobrazuj nic, a nebo komponentu Loading, kterou sis vytvořila. 
-
-## Bonus - select
-
 #### Komponenta
-Přesuň tlačítko do samostatné komponenty, která bude brát dvě prop, název města a funkci, která se vykoná na kliknutí. Prop s názvem města použij při nastavení textu tlačítka, funkci při kliku. (Přesuň i styly z `App.css`).
-Pokud bys tápala, jak předat funkci, která mění stav, jako prop, mrkni na [tenhle článek](https://newbedev.com/react-how-to-pass-function-as-props-from-functional-parent-component-to-child).   
-Komponentu si naimportuj do `App.js`. Vytvoř si pole o třech položkách (názvy měst) a pole namapuj za použití komponenty. 
+Pro lepší přehlednost přesuň předpověď do samostatné komponenty.Podobně jako u aktuálního počasí je potřeba si posílat v prop data, který budeš v `div.forecast` vykreslovat. Nezapomeň na přesunutí souvisejících stylů. 
 
+## Úklid kódu 
+Asi se ti ted v App.js a na různých místech nahromadily všemožné funkce a pomocná pole. Trochu si kód uklidíme. V `src` si vytvoř složku `utils`. V ní si vytvoř javascriptový soubor, do kterého přesuneš všechny pomocné fuknce - převod unixtimestamp na čas a na datum, filtrování pole, případně pomocná pole s dny v týdnu a měsíci. Tyto funkce si exportuj a pouze je importuj na místech, kde je využíváš. 
+
+## Bonus
+Už to vypadá dobře! Velice solidní appka! 
+Pojďme to vzít ještě dál, proč jen tři města? Mám pro tebe připravené pole 50 světových měst, která budeme moct v aplikaci zobrazovat. 
+```    
+const cities = [
+  "Abuja",
+  "Amsterdam",
+  "Aswān",
+  "Athens",
+  "Bangkok",
+  "Barcelona",
+  "Belgrade",
+  "Brno",
+  "Budapest",
+  "Buenos Aires",
+  "Cape Town",
+  "Dakar",
+  "El Alto",
+  "Hanoi",
+  "Harbin",
+  "Kingston",
+  "Kuala Lumpur",
+  "Kuwait",
+  "Kyiv",
+  "Lagos",
+  "Ljubljana",
+  "London",
+  "Madrid",
+  "Melbourne",
+  "Miami",
+  "Minsk",
+  "Moscow",
+  "New Delhi",
+  "New York",
+  "Norilsk",
+  "Paris",
+  "Porto",
+  "Prague",
+  "Reykjavik",
+  "Seoul",
+  "Skopje",
+  "Sofia",
+  "Split",
+  "Sydney",
+  "São Paulo",
+  "Tallinn",
+  "Tenerife",
+  "Tirana",
+  "Toronto",
+  "Vancouver",
+  "Vienna",
+  "Vilnius",
+  "Warsaw",
+  "Winnipeg",
+  "Yakutsk",
+];     
+```
+Toto pole si překopíruj do aplikace na vhodné místo, například do samostatného souboru ve složce `utils`. Proměnou nezapomeň exportovat.    
+Mohli bychom místa zobrazit pomocí tlačítek, ale to by přece jen bylo trochu nepřehledné. Lepším řešením bude formulářový prvek `<select>`.
+Níže vidíš přípravený HTML kód, který si můžeš překopírovat do aplikace. 
+```
+   <div className="select-wrapper">
+          <select
+            className="select"
+            name="cityselect"
+            id="cityselect"
+            value={"--"}
+            onChange={console.log("select changed")}
+          >
+            <option value={"--"}>city</option>
+          </select>
+        </div>
+
+```
+
+Zařiď, aby se na změnu hodnoty v selectu změnil i stav `city`. Musíš si vytvořit funkci, kterou zavoláš na `onChange`. Tím budeme měnit i aktuální počasí a předpověď.    
+Momentálně máš v selectu jen jednu option. Namapuj všech 50 měst z daného pole jako prvek `<option>`.
 
 
 
