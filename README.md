@@ -121,6 +121,8 @@ Bude v tomto formátu: Pokud stav není `null` nebo `undefined`, zobraz `div.wea
 Pro lepší přehlednost přesuň celý `div.weather__current` a jeho obsah do samostatné komponenty. Komponenta bude brát jednu prop, a to objekt s počasím, to pak použiješ na zobrazení dat. Nezapomeň na přesunutí funkcí, která upravují data, a stylů.     
 Komponentu si naimportuj do `App.js`, použij na správném místě a pošli stav `weather` jako prop.  
 Pokud chceš, můžeš si vytvořit i komponentu s obsahem `"Loading..."`, nebo se spinnerem, která se zobrazí před načtením dat.   
+#### Změna barvy pozadí 
+U divu s třídou `weather__current` přidej podmíněně `třídu weather__current--cold`, pouze pokud je teplota nižší než 10 stupňů. 
 
 ## Přidání dalších měst 
 Skvělá práce! Podařilo se nám stáhnout informace o počasí v určitém městě a zobrazit je v naší aplikaci nastylované a v určitém formátu!    
