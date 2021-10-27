@@ -130,8 +130,12 @@ Stav `city` si budeš muset poslat jako parametr do funkce, kde probíhá fetch,
 
 #### Změna stavu
 Stav `city` budeme měnit kliknutím na tlačítka, která pro tento účel máš v HTML připravená a zakomentovaná. Odkomentuj si `div.button-group` s třemi tlačítky. 
-Vyber si tři města (musí to být anglické názvy, např "Prague", "Reykjavik", "Tenerife"), jejichž jména napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město. Funkci, která se zavolá na klik si můžeš vytvořit zvlášť a pojmenovat ji `handleButtonClick`. Funkce bude brát jeden parametr, a ten potom nastaví do stavu `city`.     
-Pozor, abys na onClick funkci pouze předávala a nevolala ji! Předávat funkci s parametrem můžeš pomocí anonymní fuknce: `onClick={() => handleButtonClick(newValue)}`
+Vyber si tři města (musí to být anglické názvy, např "Prague", "Reykjavik", "Tenerife"), jejichž jména napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.    
+Funkci, která se zavolá na klik si můžeš vytvořit zvlášť a pojmenovat ji `handleButtonClick`. Funkce bude brát jeden parametr, a ten potom nastaví do stavu `city`.
+Pozor, abys na onClick funkci pouze předávala a nevolala ji! Předávat funkci s parametrem můžeš pomocí anonymní fuknce:     
+`<button onClick={() => handleButtonClick(newValue)}> ... </button>`
+
+             
 Teď by se zdálo, že pokud používáme náš stav ve získávání dat a tento stav změníme, měla by se měnit i informace o počasí. Zatím se to ale neděje.    
 Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data načetla pokaždé, když změníme mésto, musíme tento stav `city` poslat jako [závislost](https://www.benmvp.com/blog/object-array-dependencies-react-useEffect-hook/) do useEffectu. 
 
