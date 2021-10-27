@@ -36,13 +36,13 @@ const App = () => {
               <div className="weather__section">
                 <h3 className="weather__title">Wind</h3>
                 <div className="weather__value">
-                  <span id="vitr">--</span> km/h
+                  <span id="wind">--</span> km/h
                 </div>
               </div>
               <div className="weather__section">
                 <h3 className="weather__title">Humidity</h3>
                 <div className="weather__value">
-                  <span id="vlhkost">--</span> %
+                  <span id="humidity">--</span> %
                 </div>
               </div>
             </div>
@@ -50,13 +50,13 @@ const App = () => {
               <div className="weather__section">
                 <h3 className="weather__title">Sunrise</h3>
                 <div className="weather__value">
-                  <span id="vychod">--</span>
+                  <span id="sunrise">--</span>
                 </div>
               </div>
               <div className="weather__section">
                 <h3 className="weather__title">Sunset</h3>
                 <div className="weather__value">
-                  <span id="zapad">--</span>
+                  <span id="sunset">--</span>
                 </div>
               </div>
             </div>
