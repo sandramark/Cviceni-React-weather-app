@@ -77,19 +77,21 @@ Při správném postupu kroků bys měla teď mít ve stavu uložený objekt, kt
 
 <img src="ReadmeImages/current_weather_data.jpg"/>     
 
-Na obrázku jsou vyznačené hodnoty, které budeš zobrazovat v daných elementech obsahu `weather__current`. Jak vidíš, některé hodnoty se je potřeba před použitím trochu upravit.     
+Na obrázku jsou vyznačené hodnoty, které budeš zobrazovat v daných elementech obsahu `weather__current`. Jak vidíš, některé hodnoty je potřeba před použitím trochu upravit.     
 
 
 #### Teplota 
 Teplotu získáš s přesností na desetiny stupně. Zaokrouhli ji na celá čísla, můžeš k tomu použít třeba [Math.round](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round).  
 #### Ikona 
 V klíči icon, vidíš pouze kód ikony (např. `"01d"`), který je potřeba použít v URL z [dokumentace openWeather](https://openweathermap.org/weather-conditions). Toto url potom použij v src ikony stylem     
-`{`http://openweathermap.org/img/wn/${KOD_IKONY}@2x.png`}`
+```js
+<img {`http://openweathermap.org/img/wn/${KOD_IKONY}@2x.png`} />
+```
 #### Čas východu a západu slunce
 Východ a západ slunce je takové zvláštní dlouhé číslo. Je to [Unix Time Stamp](https://www.unixtimestamp.com/), tedy čas ve vteřinách, který uběhl od 1.1.1970. Budeš si muset vytvořit vlastní funkci, která si jako parametr vezme toto číslo a vrátí nám string v potřebném formátu, tedy např `"17:05"` nebo `"8:10"`.           
 1. K převedení na hodiny a minuty budeš potřebovat použít javascriptový object [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). Podrobnější návod na převod unix časové značky na čas je třeba v [tomto článku](https://coderrocketfuel.com/article/convert-a-unix-timestamp-to-a-date-in-vanilla-javascript). 
-1. Pro zobrazení minut ve dvouciferném formátu můžeš použít funkci [padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) - pozor, funguje jen na řetězcích!
-          Kdybsis s funkcí vůbec nevěděla rady, tak v dropdownu je jedno z možných řešení. Ale zkus to nejdřív sama! ;) 
+1. Pro zobrazení minut ve dvouciferném formátu můžeš použít funkci [padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) - pozor, funguje jen na řetězcích!        
+Kdybsis s funkcí vůbec nevěděla rady, tak v dropdownu je jedno z možných řešení. Ale zkus to nejdřív sama! ;) 
           <details>
           <summary>Už jsem to zkusila, chci se podívat.</summary>
           <br>
@@ -133,7 +135,7 @@ Stav `city` budeme měnit kliknutím na tlačítka, která pro tento účel má�
 Vyber si tři města (musí to být anglické názvy, např "Prague", "Reykjavik", "Tenerife"), jejichž jména napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.    
 Funkci, která se zavolá na klik si můžeš vytvořit zvlášť a pojmenovat ji `handleButtonClick`. Funkce bude brát jeden parametr, a ten potom nastaví do stavu `city`.
 Pozor, abys na onClick funkci pouze předávala a nevolala ji! Předávat funkci s parametrem můžeš pomocí anonymní fuknce:     
-`<button onClick={() => handleButtonClick(newValue)}> ... </button>`
+`<button onClick={() => handleButtonClick(someValue)}> ... </button>`
 
              
 Teď by se zdálo, že pokud používáme náš stav ve získávání dat a tento stav změníme, měla by se měnit i informace o počasí. Zatím se to ale neděje.    
