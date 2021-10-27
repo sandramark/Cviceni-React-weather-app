@@ -1,11 +1,11 @@
 # Aplikace na zobrazení počasí 
-V tomto úkolu si vytvoříme aplikaci, která nám zobrazí aktuální počasí a předpověď na pět dní ve vybraném místě. Finální aplikace bude vypadat nějak takto:  
+V tomto úkolu si vytvoříme aplikaci, která nám zobrazí aktuální počasí a předpověď na pět dní ve vybraném místě. Finální aplikace bude vypadat takto:  
      
 <img src="ReadmeImages/weather_app_result.png"/>
 
 ## API
 K získání dat o počasí budeme používat API zdarma z [open weather map](https://openweathermap.org/api).
-K použití daného API je potřeba se zaregistrovat, a tak získat unikátní id, které budeš zadávát při volání. Zaregistruj se tedy na stránce a vyčkej, až ti přijde e-mail s potvrzením. V emailu uvidíš své API id a také URL endpoint, který je potřeba použít při získávání dat. API id si můžeš také zjistit ve svém profilu na stránce OpenWeather, kde si můžeš zakládat i další id. Měj na paměti, že aktivace klíče po registraci může trvat několik hodin. Mezitím velice doporučuji podívat se na [dokumentaci OpenWeather](https://openweathermap.org/current) a pročíst si v jakém formátu ti data přijdou. 
+K použití daného API je potřeba se zaregistrovat, a získat tak unikátní ID, které budeš zadávát v URL API. Zaregistruj se tedy na stránce a počkej, až ti přijde e-mail s potvrzením. V emailu uvidíš své API ID a také URL endpoint, který je potřeba použít při získávání dat. API ID si můžeš také zjistit ve svém profilu na stránce OpenWeather, kde si můžeš zakládat i další ID. Měj na paměti, že aktivace klíče po registraci může trvat několik hodin. Mezitím velice doporučuji podívat se na [dokumentaci OpenWeather](https://openweathermap.org/current) a pročíst si v jakém formátu ti data přijdou. 
      
 <img src="ReadmeImages/open_weather_api_email.jpg"/>
 
@@ -20,8 +20,8 @@ Měla bys vidět toto:
 <img src="ReadmeImages/weather_app_starter.jpg"/>
 
 Hlavní html a css je pro tebe už připravené. Prohlédni si obsah složky `src`.     
-V souboru `index.js` probíhá renderování aplikace, není sem potřeba nic přidávat, ani upravovat. V `index.css` je globální stylování, všimni si, že pro základní barvy a styly jsou vytvořené proměnné, které se pak používají skrz celou aplikaci. Toto je dobrý způsob, protože kdybychom třeba chtěli změnit barevnou paletu, stačí upravit barvy tady a není potřeba procházet css celé aplikace.      
-V souboru `App.js` je připravený základní obsah aplikace. Nějaký obsah je zakomentovaný, aby se nám aplikace zkompilovala. V `App.css` je pak připravené stylování pro celou aplikaci. 
+V souboru `index.js` probíhá renderování aplikace, není sem potřeba nic přidávat, ani upravovat. V `index.css` je globální stylování, všimni si, že pro základní barvy a styly jsou vytvořené proměnné, které se pak používají skrz celou aplikaci. Kdybychom třeba chtěli změnit barevnou paletu, stačí upravit barvy tady a není potřeba procházet css celé aplikace.      
+V souboru `App.js` je připravený základní obsah aplikace. Nějaký obsah je zakomentovaný, aby se nám aplikace zkompilovala. V `App.css` je pak připravené stylování. 
 
 ## Data 
 
@@ -29,16 +29,18 @@ Abychom mohli v aplikaci zobrazovat informace o počasí, potřebujeme nejdřív
 Jelikož data z OpenWeather jsou v angličtině, a dotazy je potřeba také dělat v angličtině, naše aplikace je také v AJ, aby to nebyl takový mišmaš. 
 V `App.js` si napiš fetch funkci, ve které použiješ URL a API ID z emailu, který ti došel. Vyber si nějaké město, jehož data budeš na začátek stahovat, než přidáme možnost město měnit.     
 Je možné, že základní teplota, kterou open weather posílá bude v kelvinech, v takovém případě přidej do URL parameter `units=metric`. 
-Tvoje API url by mohlo vypadat nějak takhle:       
+Tvoje API URL by mohlo vypadat nějak takhle:       
 `api.openweathermap.org/data/2.5/weather?q=Prague&units=metric&appid={tve unikatni API ID}`     
-Funkci potom zavoláš v useEffectu, při spuštění aplikace. `App.js` bude vypadat nějak takto: 
+Funkci potom zavoláš v useEffectu, při prvním vyrenderování komponenty App. `App.js` bude vypadat nějak takto: 
 ```js
 import React, { useEffect } from "react";
 import "./App.css";
 
 const App = () => {
   const fetchWeather = () => {
-    // TVUJ KOD
+    fetch(
+       // TVUJ KOD
+    )
   }
   
   useEffect(() => {
@@ -51,33 +53,33 @@ const App = () => {
   }
 ```
 Získaná data si vypiš do konzole. 
-Pro lepší pochopení funkce fetch se můžeš podívat na zdroje [tady](https://www.pluralsight.com/guides/fetching-data-updating-state-hooks) a [tady](https://blog.bitsrc.io/fetching-data-in-react-using-hooks-c6fdd71cb24a)
+Na zdroje pro tvoření funkce, kde se fetchují data z API se můžeš podívat [tady](https://www.pluralsight.com/guides/fetching-data-updating-state-hooks) a [tady](https://blog.bitsrc.io/fetching-data-in-react-using-hooks-c6fdd71cb24a)
 
 
 ### Nastavení .env 
-Pokud si aplikaci v tomto stavu commitneš na github, přijde ti za chvíli e-mail o tom, že je nebezpečné ukládat API id do github repozitáře, kde je může kdokoli vidět a zneužít. Proto budeme muset zajistit, abys měla id uložené pouze u sebe. Toto se dělá za použití tzv. [Environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/).    
+Pokud si aplikaci v tomto stavu commitneš na github, přijde ti za chvíli e-mail o tom, že je nebezpečné ukládat API ID do github repozitáře, kde je může kdokoli vidět a zneužít. Proto budeme muset zajistit, abys měla ID uložené pouze u sebe. Toto se dělá za použití tzv. [Environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/).    
 1. V základní složce souboru (**ne v src, o jednu složku výš!**) si vytvoř soubor s názvem `.env`
-1. V tomto souboru si své id ulož jako `REACT_APP_MY_API_ID="xxxxxxxxxxx"`, kde xxx je tvé id. Můžeš si ho pojmenovat jak chceš, ale je vždy potřeba začít REACT_APP. 
+1. V tomto souboru si své ID ulož jako `REACT_APP_MY_API_ID="xxxxxxxxxxx"`, kde xxx je tvé ID. Můžeš si ho pojmenovat jak chceš, ale je vždy potřeba začít REACT_APP. 
 1. Dále si tento soubor .env přidej do .gitignore, aby se soubor nenahrál na github.
 ```js
 #api keys
 .env
 ```
-4. Kde budeš id potřebovat, stačí si ho získat pomocí `process.env.REACT_APP_MY_API_ID` a uložit si ho do proměnné, kterou potom použiješ v API URL. 
+4. Kde budeš ID potřebovat, stačí si ho získat pomocí `process.env.REACT_APP_MY_API_ID` a uložit si ho do proměnné, kterou potom použiješ v API URL. 
 
 ## State management 
 
-V každé aplikaci je potřeba někde schraňovat data, která se na frontendu zobrazují. Pokud je aplikace větší, používají se na toto složitější nástroje, jako [Redux](https://redux.js.org/introduction/core-concepts), nebo [Recoil](https://recoiljs.org/docs/introduction/core-concepts). Dalším způsobem je použití [React Context](https://reactjs.org/docs/context.html). Více informací o možnostech state managementu najdeš [v článku.](https://dev.to/workshub/state-management-battle-in-react-2021-hooks-redux-and-recoil-2am0)      
+V každé aplikaci je potřeba někde schraňovat data, která se na frontendu zobrazují. Pokud je aplikace větší, používají se na toto složitější nástroje, jako [Redux](https://redux.js.org/introduction/core-concepts), nebo [Recoil](https://recoiljs.org/docs/introduction/core-concepts). Další možností je použití [React Context](https://reactjs.org/docs/context.html). Více informací o možnostech state managementu najdeš [v článku.](https://dev.to/workshub/state-management-battle-in-react-2021-hooks-redux-and-recoil-2am0)      
 Jelikož je naše aplikace malá, postačí použití lokálního stavu, tedy použití hooku [useState](https://reactjs.org/docs/hooks-state.html). 
-V `App.js` si vytvoř stav, do kterého budeš ukládat data získáná z API. Vhodně si ho nazvi, třeba `weather` nebo `currentWeather`. Jako defaultní hodnotu použij `null`.
-Místo vypisování do konzole teď budeš nastavovat získaná data do stavu za použití funkce `setState` (nebo `setWeather`, podle toho jak sis ji nazvala). 
+V `App.js` si vytvoř stav, do kterého budeš ukládat data získáná z API. Vhodně si ho nazvi, třeba `weather` a funkci na změnu stavu `setWeather`. Jako defaultní hodnotu použij `null`.
+Místo vypisování do konzole teď budeš nastavovat získaná data do stavu za použití funkce `setWeather`. 
 
 ## Zobrazení dat 
 Při správném postupu kroků bys měla teď mít ve stavu uložený objekt, který má takový formát:     
 
 <img src="ReadmeImages/current_weather_data.jpg"/>     
 
-Na obrázku jsou vyznačené hodnoty, které budeš zobrazovat v daných elementech obsahu `weather__current`. Jak vidíš, některé hodnoty je potřeba před použitím trochu upravit.     
+Na obrázku jsou vyznačené hodnoty, které budeš zobrazovat v elementech uvnitř `div.weather__current`. Jak vidíš, některé hodnoty je potřeba před použitím trochu upravit.     
 
 
 #### Teplota 
@@ -115,10 +117,10 @@ Jsi si určitě jistá, nechceš se na to ještě podívat? A co se inspirovat n
 Pokud se ti správně podařilo hodnoty upravit, nic nebrání tomu je zobrazit v naší aplikaci, že?     
 Ale co to? Při spuštění nastane error, který nám říká, že nelze číst hodnoty z našeho stavu!     
 Důvod je ten, že se data chtějí vykreslovat při spuštění aplikace, kdy je stav nastaven na `null`. Teprve až po získání dat z API, které chvilku trvá, se stav nastaví na potřebný objekt.     
-Je potřeba tedy zobrazit obsah divu s třídou `weather__current` pouze v případě, že data máme. K tomu můžeme použít ternární operátor. 
+Chceme tedy zobrazit obsah divu s třídou `weather__current` pouze v případě, že data máme. K tomu můžeme použít ternární operátor. 
 Bude v tomto formátu: Pokud stav není `null` nebo `undefined`, zobraz `div.weather__current` a jeho obsah, v opačném případě nezobrazuj nic (`null`).
 #### Komponenta
-Pro lepší přehlednost přesuň celý `div.weather__current` a jeho obsah do samostatné komponenty. Komponenta bude brát jednu prop, a to objekt s počasím, to pak použiješ na zobrazení dat. Nezapomeň na přesunutí funkcí, která upravují data, a stylů.     
+Pro lepší přehlednost přesuň celý `div.weather__current` a jeho obsah do samostatné komponenty (programujeme přece v Reactu ;)). Komponenta bude brát jednu prop, a to objekt s počasím, který pak použiješ na zobrazení dat. Nezapomeň na přesunutí stylů a funkcí, která upravují data.     
 Komponentu si naimportuj do `App.js`, použij na správném místě a pošli stav `weather` jako prop.  
 Pokud chceš, můžeš si vytvořit i komponentu s obsahem `"Loading..."`, nebo se spinnerem, která se zobrazí před načtením dat.   
 #### Změna barvy pozadí 
@@ -134,19 +136,51 @@ Stav `city` si budeš muset poslat jako parametr do funkce, kde probíhá fetch,
 
 #### Změna stavu
 Stav `city` budeme měnit kliknutím na tlačítka, která pro tento účel máš v HTML připravená a zakomentovaná. Odkomentuj si `div.button-group` s třemi tlačítky. 
-Vyber si tři města (musí to být anglické názvy, např "Prague", "Reykjavik", "Tenerife"), jejichž jména napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.    
+Vyber si tři města (anglické názvy, např "Prague", "Reykjavik", "Tenerife"), která napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.    
 Funkci, která se zavolá na klik si můžeš vytvořit zvlášť a pojmenovat ji `handleButtonClick`. Funkce bude brát jeden parametr, a ten potom nastaví do stavu `city`.
 Pozor, abys na onClick funkci pouze předávala a nevolala ji! Předávat funkci s parametrem můžeš pomocí anonymní fuknce:     
 `<button onClick={() => handleButtonClick(someValue)}> ... </button>`
 
              
-Teď by se zdálo, že pokud používáme náš stav ve získávání dat a tento stav změníme, měla by se měnit i informace o počasí. Zatím se to ale neděje.    
-Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data načetla pokaždé, když změníme mésto, musíme tento stav `city` poslat jako [závislost](https://www.benmvp.com/blog/object-array-dependencies-react-useEffect-hook/) do useEffectu. 
+Teď by se zdálo, že pokud používáme změníme stav, změní se i data, která pomocí stavu získáváme. Zatím se to ale neděje.    
+Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data načetla pokaždé, když změníme stav `city`, musíme tento `city` poslat jako [závislost](https://www.benmvp.com/blog/object-array-dependencies-react-useEffect-hook/) do useEffectu. 
+
+## Předpověď na pět dní 
+Už dokážeme získat aktuální počasí na různých místech, teď ještě zobrazíme předpověď na následujících 5 dní.      
+Vytvoř si další funkci, kde budeš fetchovat data z OpenWeather. [V dokumentaci najdeš potřebné URL](https://openweathermap.org/forecast5).     
+Jako město opět použij `city`, které máš uložené ve stavu. Pošli ho do funkce jako parametr.     
+Nejdříve si data vypiš do konzole. 
+Předpověď na 5 dní je uváděná po 3 hodinách. Každý den 8 předpovědí, 5 x 8 = 40! V datech získáme tedy pole o 40 položkách s údaji o počasí. 
+
+<img src="ReadmeImages/fetch_forecast_object.jpg"/>   
+
+Nám ale stačí pouze jedna předpověď na den, tedy každá osmá. Vytvoř si funkci, která jako parametr bere pole a vrátí nové pole, které bude obsahovat pouze každou 8. položku. Hodit se ti možná bude funkce [filter](https://flexiple.com/javascript-filter-array/). Ale jde to i bez ní :) 
+ <details>
+          <summary>Zkouším horem dolem a nejde to, chci nápovědu.</summary>
+          <br>
+               Můžeš filtrovat ne jen podle samotných položek, ale také podle indexu, na kterém se položka nachází. 
+               ```
+               array.filter((item, index) => ... );
+               ```
+               item se někdy nahrazuje pouze podtržítkem, pokud se nepoužívá.
+          <details>
+          <summary>Stále netuším :(</summary>
+          <br>
+          Tak je fajn, že jsi to alespoň zkusila a něco nového se naučila! Pamatuj, že toto je pouze jedno v mnoha možných řešení ;) 
+               <pre><code>
+                    const filterForecast = (array) => {
+                         return array.filter((_, index) => index % 8 === 0);
+                    };
+               </code></pre>
+          </details>
+      </details>
+
 
 #### Komponenta
 Přesuň tlačítko do samostatné komponenty, která bude brát dvě prop, název města a funkci, která se vykoná na kliknutí. Prop s názvem města použij při nastavení textu tlačítka, funkci při kliku. (Přesuň i styly z `App.css`).
 Pokud bys tápala, jak předat funkci, která mění stav, jako prop, mrkni na [tenhle článek](https://newbedev.com/react-how-to-pass-function-as-props-from-functional-parent-component-to-child).   
 Komponentu si naimportuj do `App.js`. Vytvoř si pole o třech položkách (názvy měst) a pole namapuj za použití komponenty. 
+
 
 
 
