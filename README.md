@@ -43,3 +43,48 @@ Pokud si aplikaci v tomto stavu commitneš na github, přijde ti za chvíli e-ma
 .env
 ```
 4. Kde budeš id potřebovat, stačí si ho získat pomocí `process.env.REACT_APP_MY_API_ID` a uložit si ho do proměnné, kterou potom použiješ v API URL. 
+
+## State management 
+
+V každé aplikaci je potřeba někde schraňovat data, která se na frontendu zobrazují. Pokud je aplikace větší, používají se na toto složitější nástroje, jako [Redux](https://redux.js.org/introduction/core-concepts), nebo [Recoil](https://recoiljs.org/docs/introduction/core-concepts). Dalším způsobem je použití [React Context](https://reactjs.org/docs/context.html). Více informací o možnostech state managementu najdeš [v článku.](https://dev.to/workshub/state-management-battle-in-react-2021-hooks-redux-and-recoil-2am0)      
+Jelikož je naše aplikace malá, postačí použití lokálního stavu, tedy použití hooku [useState](https://reactjs.org/docs/hooks-state.html). 
+V `App.js` si vytvoř stav, do kterého budeš ukládat data získáná z API. Vhodně si ho nazvi, třeba `weather` nebo `currentWeather`. 
+Místo vypisování do konzole teď budeš nastavovat získaná data do stavu. K tomu budeš buď muset vytvářet fetch až ve funcki App, abys mohla použít funcki `setState` (`setWeather`, podle toho jak si ji pojmenuješ), a nebo posílat do funkce, kde fetchuješ data jeden parametr, a tím bude právě funkce `setWeather`. Na zavolání fetche při načtení aplikace použij `useEffect` hook. 
+
+## Zobrazení dat 
+Při správném postupu kroků bys měla teď mít ve stavu uložený objekt, který má takový formát:     
+
+<img src="ReadmeImages/current_weather_data.jpg"/>     
+
+Na obrázku jsou vyznačené hodnoty, které budeš zobrazovat v daných elementech obsahu `weather__current`. Jak vidíš, ne všechny hodnoty se dají rovnou použít, je potřeba si je muset trochu upravit.     
+
+
+#### Teplota 
+Teplota získáš s přesností na desetiny stupně. Zaokrouhli ji na celá čísla, můžeš k tomu použít třeba [Math.round](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round).  
+#### Ikona 
+V klíči icon, vidíš pouze kód ikony (např. `"01d"`), který je potřeba použít v URL z [dokumentace openWeather](https://openweathermap.org/weather-conditions). Toto url potom použij v src ikony      
+#### Čas východu a západu slunce
+Východ a západ slunce je takové zvláštní dlouhé číslo. Je to [Unix Time Stamp](https://www.unixtimestamp.com/), tedy čas ve vteřinách, který uběhl od 1.1.1970.           
+1. K převedení na hodiny a minuty budeš potřebovat použít javascriptový object [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date). Podrobnější návod na převod unix časové značky na čas je třeba v [tomto článku](https://coderrocketfuel.com/article/convert-a-unix-timestamp-to-a-date-in-vanilla-javascript). 
+1. Pro zobrazení minut ve dvouciferném formátu můžeš použít funkci [padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) - pozor, funguje jen na řetězcích!
+          Kdybsis s funkcí vůbec nevěděla rady, tak v dropdownu je jedno z možných řešení. Ale zkus to nejdřív sama! ;) 
+          <details>
+          <summary>Už jsem to zkusila, chci se podívat.</summary>
+          <br>
+                    Jsi si určitě jistá, nechceš se na to ještě podívat? A co se inspirovat nějakým [řešením tady](https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript)? 
+          <details>
+          <summary>Ani tohle nepomohlo.</summary>
+          <br>
+          Super, že jsi to alespoň zkusila :) Pamatuj, že toto je pouze jedno v mnoha možných řešení ;) 
+               <pre><code>
+                    const getTimefromUnix = (unix) => {
+                         const hours = new Date(unix * 1000).getHours();
+                         const minutes = new Date(unix * 1000).getMinutes();
+                         const twoDigitMinutes = minutes.toString().padStart(2, "0");
+                           return `${hours}:${twoDigitMinutes}`;
+                        };
+               </code></pre>
+          </details>
+      </details>
+          
+    
