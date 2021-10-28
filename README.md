@@ -158,8 +158,10 @@ Nám ale stačí pouze jedna předpověď na den, tedy každá osmá. Vytvoř si
  <details>
           <summary>Zkouším horem dolem a nejde to, chci nápovědu.</summary>
           <br>
-               Můžeš filtrovat ne jen podle samotných položek, ale také podle indexu, na kterém se položka nachází. 
-               `array.filter((item, index) => ... ); `     
+               Můžeš filtrovat ne jen podle samotných položek, ale také podle indexu, na kterém se položka nachází.      
+     <br/>
+     <code>array.filter((item, index) => ... ); </code>   
+     <br/>
                item se někdy nahrazuje pouze podtržítkem, pokud se nepoužívá.
           <details>
           <summary>Stále netuším :(</summary>
@@ -316,8 +318,8 @@ Níže vidíš přípravený HTML kód, který si můžeš překopírovat do apl
 
 ```
 
-Zařiď, aby se na změnu hodnoty v selectu změnil i stav `city`. Musíš si vytvořit funkci, kterou zavoláš na `onChange`. Tím budeme měnit i aktuální počasí a předpověď.    
-Momentálně máš v selectu jen jednu option. Namapuj všech 50 měst z daného pole jako prvek `<option>`.
+Momentálně máš v selectu jen jednu option. Namapuj všech 50 měst z daného pole jako prvek `<option>`. Zařiď, aby se na změnu hodnoty v selectu změnil i stav `city`. Musíš si vytvořit funkci, kterou zavoláš na `onChange`. Tím budeme měnit i aktuální počasí a předpověď.    
+
 
 
 
