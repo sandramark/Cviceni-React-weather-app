@@ -241,7 +241,11 @@ Pokud `forecast` není `undefined` nebo `null`, zobraz předpověď. V opačném
 Pro lepší přehlednost přesuň předpověď do samostatné komponenty.Podobně jako u aktuálního počasí je potřeba si posílat v prop data, který budeš v `div.forecast` vykreslovat. Nezapomeň na přesunutí souvisejících stylů. 
 
 ## Úklid kódu 
-Asi se ti ted v App.js a na různých místech nahromadily všemožné funkce a pomocná pole. Trochu si kód uklidíme. V `src` si vytvoř složku `utils`. V ní si vytvoř javascriptový soubor, do kterého přesuneš všechny pomocné fuknce - převod unixtimestamp na čas a na datum, filtrování pole, případně pomocná pole s dny v týdnu a měsíci. Tyto funkce si exportuj a pouze je importuj na místech, kde je využíváš. 
+Asi se ti ted v App.js a na různých místech nahromadily všemožné funkce a pomocná pole. Trochu si kód uklidíme. V `src` si vytvoř složku `utils`. V ní si vytvoř javascriptový soubor, do kterého přesuneš všechny pomocné fuknce - převod unixtimestamp na čas a na datum, filtrování pole, případně pomocná pole s dny v týdnu a měsíci. Tyto funkce si exportuj a pouze je importuj na místech, kde je využíváš.     
+
+## Hostování stránky
+Nasaď si stránku za použití třeba služby [netlify](https://www.netlify.com/). Budeš se muset přihlásit svým github účtem a z něj potom vybrat správný repozitář. 
+Na netlify si můžeš přečíst [návod](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/), který tě provede jak stránku nasadit a které příkazy použít. Nebo si vybrat jakoukoli jinou hostovací službu, kterou znáš.     
 
 ## Bonus
 Už to vypadá dobře! Velice solidní appka! 
