@@ -245,7 +245,10 @@ Asi se ti ted v App.js a na různých místech nahromadily všemožné funkce a 
 
 ## Hostování stránky
 Nasaď si stránku za použití třeba služby [netlify](https://www.netlify.com/). Budeš se muset přihlásit svým github účtem a z něj potom vybrat správný repozitář. 
-Na netlify si můžeš přečíst [návod](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/), který tě provede jak stránku nasadit a které příkazy použít. Nebo si vybrat jakoukoli jinou hostovací službu, kterou znáš.     
+Na netlify si můžeš přečíst [návod](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/), který tě provede jak stránku nasadit a které příkazy použít. Nebo si vybrat jakoukoli jinou hostovací službu, kterou znáš.       
+
+Při odevzdání úkolu v Czechitas portálu dej odkaz na github, ale i na stránku, kterou hostuješ.
+
 
 ## Bonus
 Už to vypadá dobře! Velice solidní appka! 
