@@ -135,15 +135,15 @@ Vytvoř si nový stav s vhodným názvem (např. `city`) a ulož do něj jako ř
 Stav `city` si budeš muset poslat jako parametr do funkce, kde probíhá fetch, abys ho mohla v URL použít. 
 
 #### Změna stavu
-Stav `city` budeme měnit kliknutím na tlačítka, která pro tento účel máš v HTML připravená a zakomentovaná. Odkomentuj si `div.button-group` s třemi tlačítky. 
-Vyber si tři města (anglické názvy, např "Prague", "Reykjavik", "Tenerife"), která napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.    
+Stav `city` budeme měnit kliknutím na tlačítka, která pro tento účel máš v HTML připravená a zakomentovaná. Odkomentuj si `div.button-group` s třemi tlačítky.     
+Vyber si tři města (anglické názvy, např "Prague", "Reykjavik", "Tenerife"), která napíšeš na tlačítka. Při kliku na tlačítko změň stav na toto město.          
 Funkci, která se zavolá na klik si můžeš vytvořit zvlášť a pojmenovat ji `handleButtonClick`. Funkce bude brát jeden parametr, a ten potom nastaví do stavu `city`.
 Pozor, abys na onClick funkci pouze předávala a nevolala ji! Předávat funkci s parametrem můžeš pomocí anonymní fuknce:     
 `<button onClick={() => handleButtonClick(someValue)}> ... </button>`
 
              
-Teď by se zdálo, že pokud používáme změníme stav, změní se i data, která pomocí stavu získáváme. Zatím se to ale neděje.    
-Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data načetla pokaždé, když změníme stav `city`, musíme tento `city` poslat jako [závislost](https://www.benmvp.com/blog/object-array-dependencies-react-useEffect-hook/) do useEffectu. 
+Teď by se zdálo, že pokud změníme stav, změní se i data, která pomocí stavu získáváme. Zatím se to ale neděje.    
+Je to proto, že fetch voláme pouze při spuštění aplikace. Aby se data načetla pokaždé, když změníme stav `city`, musíme `city` poslat jako [závislost](https://www.benmvp.com/blog/object-array-dependencies-react-useEffect-hook/) do useEffectu. 
 
 ## Předpověď na pět dní 
 Už dokážeme získat aktuální počasí na různých místech, teď ještě zobrazíme předpověď na následujících 5 dní.      
