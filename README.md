@@ -246,6 +246,13 @@ Asi se ti ted v App.js a na různých místech nahromadily všemožné funkce a 
 ## Hostování stránky
 Nasaď si stránku za použití třeba služby [netlify](https://www.netlify.com/). Budeš se muset přihlásit svým github účtem a z něj potom vybrat správný repozitář. 
 Na netlify si můžeš přečíst [návod](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/), který tě provede jak stránku nasadit a které příkazy použít. Nebo si vybrat jakoukoli jinou hostovací službu, kterou znáš.       
+Při nastavení deploye na Netlify budeš muset nastavit i proměnné, které máš momentálně schované v souboru `.env`, který je jen u tebe na počítači. Při nastavení deploye, klikni na 
+#### Show advanced
+uvidíš sekci 
+#### Advanced build settings    
+Tam si přidej klíč pomocí kliknutí na **New variable**. Klíč musí být se stejným názvem, jako je v souboru .env.        
+
+<img src="ReadmeImages/netlify_env.jpg"/>
 
 Při odevzdání úkolu v Czechitas portálu dej odkaz na github, ale i na stránku, kterou hostuješ.
 
