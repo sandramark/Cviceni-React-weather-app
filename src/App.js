@@ -1,86 +1,104 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import Weather from "./components/Weather";
+import Forecast from "./components/Forecast";
+import loader from "./assets/Loader.gif";
+import { getTimefromUnix } from "./utils";
+import cities from "./cities";
 
 const App = () => {
+  const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState("London");
+  const [forecast, setForecast] = useState(null);
+
+  const fetchWeather = () => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${process.env.REACT_APP_MY_API_ID}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setWeather(data);
+      });
+  };
+
+  const fetchForecast = () => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${process.env.REACT_APP_MY_API_ID}`
+    )
+      .then((response) => response.json())
+      .then((dataD) => {
+        setForecast(dataD.list.filter((_, index) => index % 8 === 0));
+      });
+  };
+
+  useEffect(() => {
+    fetchWeather();
+    fetchForecast();
+  }, [city]);
+
+  // const handleClick = (event) => {
+  //   setCity(event.target.innerText);
+
+  // };
+
+  const handleChange = (event) => {
+    setCity(event.target.value);
+  };
+
   return (
     <div className="App">
       <div className="container">
-        <h1>My Weather App</h1>
+        <h1>My Weather App </h1>{" "}
+        <form className="select-wrapper">
+          <select
+            className="select"
+            name="cityselect"
+            id="cityselect"
+            onChange={handleChange}
+          >
+            {cities.map((item) => {
+              return (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+        </form>
         <div className="weather">
           {/* <div className="button-group">
-            <button className="button">City01</button>
-            <button className="button">City02</button>
-            <button className="button">City03</button>
+            <button className="button" onClick={handleClick}>
+              Prague{" "}
+            </button>{" "}
+            <button className="button" onClick={handleClick}>
+              Reykjavik{" "}
+            </button>{" "}
+            <button className="button" onClick={handleClick}>
+              Tenerife{" "}
+            </button>{" "}
           </div> */}
-          <div className="weather__current">
-            <h2 className="weather__city" id="mesto">
-              City, Country
-            </h2>
-            <div className="weather__inner weather__inner--center">
-              <div className="weather__section weather__section--temp">
-                <span className="weather__temp-value" id="teplota">
-                  --
-                </span>
-                <span className="weather__temp-unit">°C</span>
-                <div className="weather__description" id="popis">
-                  --
-                </div>
-              </div>
-              <div
-                className="weather__section weather__section--icon"
-                id="ikona"
-              >
-                --
-                {/* <img
-                  src={URL FROM OPEN WEATHER}
-                  alt="current weather icon"
-                /> */}
-              </div>
-            </div>
-            <div className="weather__inner">
-              <div className="weather__section">
-                <h3 className="weather__title">Wind</h3>
-                <div className="weather__value">
-                  <span id="wind">--</span> km/h
-                </div>
-              </div>
-              <div className="weather__section">
-                <h3 className="weather__title">Humidity</h3>
-                <div className="weather__value">
-                  <span id="humidity">--</span> %
-                </div>
-              </div>
-            </div>
-            <div className="weather__inner">
-              <div className="weather__section">
-                <h3 className="weather__title">Sunrise</h3>
-                <div className="weather__value">
-                  <span id="sunrise">--</span>
-                </div>
-              </div>
-              <div className="weather__section">
-                <h3 className="weather__title">Sunset</h3>
-                <div className="weather__value">
-                  <span id="sunset">--</span>
-                </div>
-              </div>
-            </div>
+
+          {weather ? (
+            <Weather
+              weatherData={weather}
+              cityData={city}
+              sunrise={getTimefromUnix(weather?.sys?.sunrise)}
+              sunset={getTimefromUnix(weather?.sys?.sunset)}
+            />
+          ) : (
+            <img src={loader} alt="loader" />
+          )}
+
+          <div className="weather__forecast" id="predpoved">
+            {forecast ? (
+              // eslint-disable-next-line no-undef
+              forecast.map((item) => <Forecast forecast={item} key={item.dt} />)
+            ) : (
+              <img src={loader} alt="loader" />
+            )}
           </div>
-          <div class="weather__forecast" id="predpoved">
-            <div class="forecast">
-              <div class="forecast__day">Day, date</div>
-              <div class="forecast__icon">
-                {/* <img
-                  src={URL FROM OPEN WEATHER}
-                  style={{ height: "100%" }}
-                  alt="current weather icon"
-                /> */}
-              </div>
-              <div class="forecast__temp">-- °C</div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 };

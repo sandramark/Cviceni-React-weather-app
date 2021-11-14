@@ -115,8 +115,14 @@ h1 {
   font-size: var(--font-small);
 }
 .forecast__icon {
-  height: 40px;
+  max-width: 60px;
+  max-height: 60px;
 }
+.forecast__icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .forecast__temp {
   flex: 0 0 70px;
   text-align: right;
