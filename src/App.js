@@ -34,6 +34,7 @@ const App = () => {
   useEffect(() => {
     fetchWeather();
     fetchForecast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
 
   // const handleClick = (event) => {
